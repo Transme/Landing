@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+<canvas id="canvas">
+</canvas>
+<script type="text/javascript" src="js/fireworks.js"></script>
+<div id="box">
+    <header>
+        <h1>LET'S SHARE</h1>
+        <h4>Landing博客</h4>
+        <hr style="color: #FFFFFF; width: 100%">
+        <h2>登陆界面</h2>
+    </header>
+    <main id="main">
+        <form action="" method="post" id="form">
+            <h4>用户名</h4>
+            <input placeholder="用户名">
+            <h4>密码</h4>
+            <input placeholder="密码">
+            <template v-if="state === 'SignIn'">
+                <button><span>立即登录</span></button>
+            </template>
+            <template v-if="state === 'SignUp'">
+                <button><span>立即注册</span></button>
+            </template>
+        </form>
+        <template v-if="state==='SignIn'">
+            <div id="foot1">
+                <p style="color: white; font-size: 11px">没有账号?
+                    <a @click="aClick(); return false" href="#">立即注册</a>
+                </p>
+            </div>
+        </template>
+        <template v-if="state==='SignUp'">
+            <div id="foot2">
+                <p style="color: white; font-size: 11px">已有账号?
+                    <a @click="aClick(); return false" href="#">立即登录</a>
+                </p>
+            </div>
+        </template>
+    </main>
+</div>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
