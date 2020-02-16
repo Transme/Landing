@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>登录界面</title>
     <link href="css/index.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico">
 </head>
 <body>
-<canvas id="canvas">
-</canvas>
 <script type="text/javascript" src="js/fireworks.js"></script>
 <div id="box">
     <header>
@@ -17,16 +16,16 @@
         <h2>登陆界面</h2>
     </header>
     <main id="main">
-        <form action="" method="post" id="form">
+        <form :action="actor" method="post" id="form">
             <h4>用户名</h4>
-            <input placeholder="用户名">
+            <input placeholder="用户名" name="username" type="text">
             <h4>密码</h4>
-            <input placeholder="密码">
+            <input placeholder="密码" name="password" type="password">
             <template v-if="state === 'SignIn'">
-                <button><span>立即登录</span></button>
+                <input type="submit" value="立即登录" id="b1">
             </template>
             <template v-if="state === 'SignUp'">
-                <button><span>立即注册</span></button>
+                <input type="submit" value="立即注册" id="b2">
             </template>
         </form>
         <template v-if="state==='SignIn'">
