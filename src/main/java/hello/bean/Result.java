@@ -6,7 +6,9 @@ public abstract class Result<T> {
         FAIL("fail");
 
         private String state;
-
+        public String getState() {
+            return state;
+        }
         ResultState(String state) {
             this.state = state;
         }

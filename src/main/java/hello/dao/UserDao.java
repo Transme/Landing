@@ -1,8 +1,9 @@
 package hello.dao;
 
 import hello.bean.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserDao {
     int deleteByPrimaryKey(Long id);
 

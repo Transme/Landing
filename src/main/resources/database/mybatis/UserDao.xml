@@ -97,8 +97,7 @@
     set username = #{username,jdbcType=VARCHAR},
       encrypted_password = #{encryptedPassword,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      updated_at = now()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

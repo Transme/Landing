@@ -1,50 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录界面</title>
-    <link href="css/index.css" rel="stylesheet">
+    <title>首页</title>
+    <link href="css/home.css" rel="stylesheet">
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
-<script type="text/javascript" src="js/fireworks.js"></script>
-<div id="box">
-    <header>
-        <h1>LET'S SHARE</h1>
-        <h4>Landing博客</h4>
-        <hr style="color: #FFFFFF; width: 100%">
-        <h2>登陆界面</h2>
-    </header>
-    <main id="main">
-        <form :action="actor" method="post" id="form">
-            <h4>用户名</h4>
-            <input placeholder="用户名" name="username" type="text">
-            <h4>密码</h4>
-            <input placeholder="密码" name="password" type="password">
-            <template v-if="state === 'SignIn'">
-                <input type="submit" value="立即登录" id="b1">
-            </template>
-            <template v-if="state === 'SignUp'">
-                <input type="submit" value="立即注册" id="b2">
-            </template>
-        </form>
-        <template v-if="state==='SignIn'">
-            <div id="foot1">
-                <p style="color: white; font-size: 11px">没有账号?
-                    <a @click="aClick(); return false" href="#">立即注册</a>
-                </p>
-            </div>
-        </template>
-        <template v-if="state==='SignUp'">
-            <div id="foot2">
-                <p style="color: white; font-size: 11px">已有账号?
-                    <a @click="aClick(); return false" href="#">立即登录</a>
-                </p>
-            </div>
-        </template>
-    </main>
+<div id="head">
+
 </div>
-<script type="text/javascript" src="js/vue.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<div id="box">
+
+</div>
 </body>
 </html>

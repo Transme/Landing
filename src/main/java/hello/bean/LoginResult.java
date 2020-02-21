@@ -23,7 +23,9 @@ public class LoginResult  extends Result<User> {
     public static LoginResult fail(String msg){
         return new LoginResult(ResultState.FAIL, msg, null, false);
     }
-
+    public static LoginResult fail(String msg, User user){
+        return new LoginResult(ResultState.FAIL, msg, user, false);
+    }
     public boolean isLogin() {
         return isLogin;
     }

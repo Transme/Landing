@@ -1,5 +1,7 @@
 package hello.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +11,7 @@ import java.util.Date;
  */
 public class Blog implements Serializable {
     private Long id;
-
+    @JsonIgnore
     private Long userId;
 
     private String title;
@@ -21,6 +23,8 @@ public class Blog implements Serializable {
     private Date updatedAt;
 
     private String content;
+
+    private User user;
 
     private static final long serialVersionUID = 1L;
 
@@ -78,5 +82,26 @@ public class Blog implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

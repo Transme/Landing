@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +31,9 @@ public class authorController {
         this.authService = authService;
     }
 
-    @PostMapping("/author/register")
+    @PostMapping("author/register")
     @ResponseBody
-    public LoginResult LogIn(@RequestBody Map<String, String> info){
+    public LoginResult register(@RequestParam Map<String, String> info){
         String username = info.get("username");
         String password = info.get("password");
         User user = null;
@@ -55,20 +56,15 @@ public class authorController {
         return LoginResult.success(user,"注册成功");
     }
 
-    @GetMapping("/author")
+    @GetMapping("author")
     @ResponseBody
     public LoginResult isLogin(){
-//        User user = (User)request.getSession().getAttribute("user");
-//        if(user == null){
-//            return LoginResult.success("用户没登录！", false);
-//        }
-//        return LoginResult.success(userService.getUserByUserName(user.getUsername()), "用户已经登录！");
         return authService.getCurrentUser()
                             .map(user -> LoginResult.success("用户已经登录!", true))
                             .orElse(LoginResult.fail("用户没登录"));
     }
 
-    @PostMapping("/author/Login")
+    @PostMapping("author/Login")
     @ResponseBody
     public Object Login(@RequestParam Map<String, Object> info, HttpServletRequest request){
         if(request.getHeader("user-agent") == null || !request.getHeader("user-agent").contains("Mozilla")){
@@ -96,7 +92,7 @@ public class authorController {
         }
     }
 
-    @GetMapping("/author/logout")
+    @GetMapping("author/logout")
     @ResponseBody
     public LoginResult Logout(){
         LoginResult result = authService.getCurrentUser()
@@ -104,5 +100,27 @@ public class authorController {
                 .orElse(LoginResult.fail("用户没登录！"));
         SecurityContextHolder.clearContext();
         return result;
+    }
+
+    @PostMapping("author/alterPassword")
+    @ResponseBody
+    public LoginResult alterPassword(@RequestParam Map<String, String> params){
+        String username = params.get("username");
+        String password = params.get("password");
+
+        LoginResult result = authService.getCurrentUser()
+                .map(user -> userService.update(validationUser(user, username, password)))
+                .orElse(LoginResult.fail("用户没登录"));
+        SecurityContextHolder.clearContext();
+        return result;
+    }
+
+    public User validationUser(User user, String username, String password){
+        if(!user.getUsername().equals(username)){
+            return null;
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setEncryptedPassword(encoder.encode(password));
+        return user;
     }
 }
